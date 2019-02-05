@@ -1,0 +1,43 @@
+{
+  "name": "tweet-rater",
+  "version": "1.0.0",
+  "description": "Scrapes tweets, and then makes a website to rate them on a 5 star scale",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "parcel client/index.html",
+    "start": "npm run build; node index.js",
+    "build": "parcel build client/index.html --public-url /dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danman113/tweet-rater.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danman113/tweet-rater/issues"
+  },
+  "homepage": "https://github.com/danman113/tweet-rater#readme",
+  "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-react": "^7.0.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.12",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-twitter-widgets": "^1.7.1",
+    "sqlite3": "^4.0.6",
+    "twit": "^2.2.11",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "^1.11.0"
+  }
+}
