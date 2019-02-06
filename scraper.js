@@ -3,15 +3,20 @@ const fs = require('fs')
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database('./tweets.db')
 const create = fs.readFileSync( `${__dirname}/create.sql`, { encoding: 'utf8' })
-db.run(create)
-// console.log(process.env)
+
+db.serialize(() => {
+  const statements = create.split(';').filter(s => Boolean(s.trim()))
+  for (let stmnt of statements) {
+    db.run(`${stmnt};`)
+  }
+})
 
 let acc = new twit({
   consumer_key: process.env.pwnlib_consumer_key,
   consumer_secret: process.env.pwnlib_consumer_secret,
   access_token: process.env.pwnlib_access_token,
   access_token_secret: process.env.pwnlib_access_token_secret,
-  timeout_ms: 60*1000,  // optional HTTP request timeout to apply to all requests.
+  timeout_ms: 60 * 1000
 })
 
 // acc.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }, function(err, data, response) {

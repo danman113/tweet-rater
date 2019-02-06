@@ -31,12 +31,12 @@ class App extends React.Component {
               {tweet && <Tweet tweetId={tweet} />}
             </div>
           </div>
-          <Rater fetchTweet={this.fetchTweet} />
+          <Rater fetchTweet={this.fetchTweet} tweetId={tweet} />
         </div>
         <footer className="footer">
           <div className="content has-text-centered">
             <p>
-              Tweet Rater is not responsible for the tweets you're about to see.
+              Tweet Rater is not responsible for the tweets you're about to see. Possibly not safe for work.
             </p>
           </div>
         </footer>

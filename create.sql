@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS ratings (
   political INTEGER default 0,
   humor INTEGER default 0,
   sexual INTEGER default 0,
+  sarcasm INTEGER default 0,
   dateAdded INTEGER default (datetime(current_timestamp)),
   FOREIGN KEY(tweet_id) REFERENCES tweets(tweet_id)
 );

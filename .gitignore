@@ -64,3 +64,4 @@ run.sh
 .cache
 *.db
 dist/
+trainingData.json
