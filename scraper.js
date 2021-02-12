@@ -60,11 +60,18 @@ const getText = tweet => {
 const insertTweet = tweet => {
   const text = removeAts(removeLinks(getText(tweet)))
   console.log(text)
-  db.run('INSERT INTO tweets (text, username, tweet_id) VALUES ($text, $username, $tweet_id)', {
-    $text: text,
-    $username: tweet.user.screen_name,
-    $tweet_id: tweet.id_str
-  })
+  try {
+    db.run('INSERT INTO tweets (text, username, tweet_id) VALUES ($text, $username, $tweet_id)', {
+      $text: text,
+      $username: tweet.user.screen_name,
+      $tweet_id: tweet.id_str
+    }, err => {
+      err && console.log('ERROR\n'.repeat(20))
+      err && console.log(err)
+    })
+  } catch (e) {
+    console.log('ERROR')
+  }
 }
 
 var stream = acc.stream('statuses/sample', {language: 'en', tweet_mode: 'extended'})

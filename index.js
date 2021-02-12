@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 app.use('/api', cors())
 
 app.get('/api/tweet', (req, res) => {
-  db.get('SELECT tweet_id FROM tweets ORDER BY RANDOM() LIMIT 1;', (err, { tweet_id = '20' }) => {
+  db.get('SELECT tweet_id FROM tweets WHERE length(text) <= 50 ORDER BY RANDOM() LIMIT 1;', (err, { tweet_id = '20' }) => {
     res.json({ tweet: tweet_id })
   })
 })
@@ -19,15 +19,17 @@ app.get('/api/ratings', (req, res) => {
   db.all(`
     SELECT
       text,
-      spam,
-      anger,
-      political,
-      humor,
-      sexual,
-      sarcasm
+      AVG(spam) as spam,
+      AVG(anger) as anger,
+      AVG(political) as political,
+      AVG(humor) as humor,
+      AVG(sexual) as sexual,
+      AVG(sarcasm) as sarcasm
     FROM
       ratings
-    LEFT JOIN tweets ON tweets.tweet_id = ratings.tweet_id;
+    LEFT JOIN tweets ON tweets.tweet_id = ratings.tweet_id
+    GROUP BY tweets.text
+    ORDER BY text DESC;
   `, (err, ratings) => {
     console.log(ratings)
     res.json({ ratings })

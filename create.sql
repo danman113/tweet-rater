@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS tweets (
   id INTEGER PRIMARY KEY,
   text TEXT NOT NULL,
   username TEXT NOT NULL,
-  tweet_id TEXT NOT NULL,
+  tweet_id TEXT NOT NULL UNIQUE,
   sentiment INTEGER default 0,
   sentiment_spam INTEGER default 0,
   sentiment_anger INTEGER default 0,
